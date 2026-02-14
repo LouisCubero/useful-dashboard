@@ -50,12 +50,14 @@ export default function Page() {
           Submit
         </button>
       </div>
+    </main>
+    <div className="fixed top-4 right-4 z-50">
       <SlingshotVolume
         onVolumeChange={(v) => {
           if (audioRef.current) audioRef.current.volume = v
         }}
       />
-    </main>
+    </div>
     <audio ref={audioRef} src="/audio/trap-queen.mp3" loop />
     <Chatbot />
   </>
