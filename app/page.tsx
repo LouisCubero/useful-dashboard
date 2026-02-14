@@ -1,11 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Chatbot } from "@/components/chatbot"
 
 export default function Page() {
   const [number, setNumber] = useState(9173210000)
   const [blurred, setBlurred] = useState(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    const play = () => {
+      audioRef.current?.play()
+      window.removeEventListener("click", play)
+    }
+    window.addEventListener("click", play)
+    return () => window.removeEventListener("click", play)
+  }, [])
 
   const formatPhone = (num: number) => {
     const s = String(num).padStart(10, "0")
@@ -40,6 +50,7 @@ export default function Page() {
         </button>
       </div>
     </main>
+    <audio ref={audioRef} src="/audio/trap-queen.mp3" loop />
     <Chatbot />
   </>
   )
