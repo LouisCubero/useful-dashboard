@@ -8,6 +8,8 @@ import { RedeemCode } from "@/components/redeem-code"
 export default function Page() {
   const [number, setNumber] = useState(9173210000)
   const [blurred, setBlurred] = useState(false)
+  const [fixedMode, setFixedMode] = useState(false)
+  const [phoneInput, setPhoneInput] = useState("")
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const musicStartedRef = useRef(false)
@@ -15,6 +17,11 @@ export default function Page() {
   const formatPhone = (num: number) => {
     const s = String(num).padStart(10, "0")
     return `(${s.slice(0, 3)}) ${s.slice(3, 6)}-${s.slice(6)}`
+  }
+
+  const handleFix = () => {
+    setBlurred(false)
+    setFixedMode(true)
   }
 
   return (
@@ -26,24 +33,42 @@ export default function Page() {
       <h1 className="text-3xl font-bold text-foreground md:text-4xl">
         Please enter your phone number:
       </h1>
-      <div className="flex items-center gap-4">
-        <h2 className="text-2xl font-semibold tabular-nums text-foreground md:text-3xl">
-          {formatPhone(number)}
-        </h2>
-        <button
-          onClick={() => setNumber((n) => n + 1)}
-          className="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-2xl font-bold text-primary-foreground transition-colors hover:bg-primary/90"
-          aria-label="Increment phone number"
-        >
-          +
-        </button>
-        <button
-          onClick={() => setBlurred(true)}
-          className="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          Submit
-        </button>
-      </div>
+      {fixedMode ? (
+        <div className="flex items-center gap-4">
+          <input
+            type="tel"
+            value={phoneInput}
+            onChange={(e) => setPhoneInput(e.target.value)}
+            placeholder="(917) 321-0000"
+            className="h-12 w-64 rounded-md border border-border bg-muted px-4 text-xl tabular-nums text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+          <button
+            onClick={() => {}}
+            className="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Submit
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center gap-4">
+          <h2 className="text-2xl font-semibold tabular-nums text-foreground md:text-3xl">
+            {formatPhone(number)}
+          </h2>
+          <button
+            onClick={() => setNumber((n) => n + 1)}
+            className="flex h-12 w-12 items-center justify-center rounded-md bg-primary text-2xl font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+            aria-label="Increment phone number"
+          >
+            +
+          </button>
+          <button
+            onClick={() => setBlurred(true)}
+            className="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Submit
+          </button>
+        </div>
+      )}
     </main>
     <div className="fixed top-4 right-4 z-50">
       <SlingshotVolume
@@ -58,7 +83,7 @@ export default function Page() {
         }}
       />
     </div>
-    <RedeemCode />
+    <RedeemCode onFix={handleFix} />
     <audio ref={audioRef} src="/audio/trap-queen.mp3" loop />
     <Chatbot />
   </>

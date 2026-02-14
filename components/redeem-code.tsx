@@ -14,7 +14,11 @@ const KONAMI = [
   "Enter",
 ]
 
-export function RedeemCode() {
+interface RedeemCodeProps {
+  onFix?: () => void
+}
+
+export function RedeemCode({ onFix }: RedeemCodeProps) {
   const [unlocked, setUnlocked] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [doomMode, setDoomMode] = useState(false)
@@ -88,8 +92,12 @@ export function RedeemCode() {
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              if (code.toLowerCase().trim() === "doom") {
+              const val = code.toLowerCase().trim()
+              if (val === "doom") {
                 setDoomMode(true)
+              } else if (val === "fix") {
+                onFix?.()
+                setCode("")
               } else {
                 setSubmitted(true)
               }
