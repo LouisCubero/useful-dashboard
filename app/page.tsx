@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Chatbot } from "@/components/chatbot"
 
 export default function Page() {
   const [number, setNumber] = useState(9173210000)
@@ -12,6 +13,7 @@ export default function Page() {
   }
 
   return (
+    <>
     <main
       className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-4 transition-all duration-500"
       style={{ filter: blurred ? "blur(4px)" : "none" }}
@@ -38,5 +40,7 @@ export default function Page() {
         </button>
       </div>
     </main>
+    <Chatbot />
+  </>
   )
 }
