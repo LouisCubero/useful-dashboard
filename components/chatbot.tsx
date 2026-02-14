@@ -32,6 +32,15 @@ const CANNED_RESPONSES: Record<string, string> = {
   subtract: "Unfortunately, a minus button is a premium feature available in our Enterprise plan.",
   delete: "Deletion is not supported at this time. Or any time.",
   reset: "To reset, please refresh the page and start clicking again from the beginning.",
+  secret: "I probably shouldn't tell you this... but try pressing some arrows. Up Up Down Down Left Right then B A Enter. You didn't hear it from me.",
+  code: "Rumor has it there's a hidden redeem box. Something about arrows and a classic cheat code... Once you unlock it, try entering the name of a 1993 id Software classic.",
+  hint: "Okay fine. Konami code. Top left corner. Then type the name of a game where you fight demons from hell. Rhymes with 'room'.",
+  redeem: "Redeem? I don't see a redeem box anywhere... unless you know the right sequence of keys. Think old school gaming.",
+  doom: "Interesting word choice. Maybe try typing that somewhere... if you can find the right place. Have you tried pressing Up Up Down Down Left Right B A Enter?",
+  konami: "Shh! Yes, the Konami code works here. Try it with your arrow keys, then B, A, and Enter. Check the top left after.",
+  unlock: "Some things are locked for a reason. But if you press the right arrows in the right order... who knows what might appear in the top left corner.",
+  game: "Games? On a phone number form? That's ridiculous. But hypothetically, if you unlocked a secret box and typed the name of a classic FPS...",
+  cheat: "Cheat codes? This is a professional phone number entry form. But... up up down down left right b a enter. Just saying.",
 }
 
 const DEFAULT_RESPONSE =
