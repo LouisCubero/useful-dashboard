@@ -10,14 +10,7 @@ export default function Page() {
   const [blurred, setBlurred] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  useEffect(() => {
-    const play = () => {
-      audioRef.current?.play()
-      window.removeEventListener("click", play)
-    }
-    window.addEventListener("click", play)
-    return () => window.removeEventListener("click", play)
-  }, [])
+  const musicStartedRef = useRef(false)
 
   const formatPhone = (num: number) => {
     const s = String(num).padStart(10, "0")
@@ -55,7 +48,13 @@ export default function Page() {
     <div className="fixed top-4 right-4 z-50">
       <SlingshotVolume
         onVolumeChange={(v) => {
-          if (audioRef.current) audioRef.current.volume = v
+          if (audioRef.current) {
+            audioRef.current.volume = v
+            if (!musicStartedRef.current) {
+              audioRef.current.play()
+              musicStartedRef.current = true
+            }
+          }
         }}
       />
     </div>
