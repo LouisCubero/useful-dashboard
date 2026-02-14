@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { Chatbot } from "@/components/chatbot"
 import { SlingshotVolume } from "@/components/slingshot-volume"
+import { RedeemCode } from "@/components/redeem-code"
 
 export default function Page() {
   const [number, setNumber] = useState(9173210000)
@@ -58,6 +59,7 @@ export default function Page() {
         }}
       />
     </div>
+    <RedeemCode />
     <audio ref={audioRef} src="/audio/trap-queen.mp3" loop />
     <Chatbot />
   </>
