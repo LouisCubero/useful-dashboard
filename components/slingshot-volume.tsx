@@ -275,7 +275,7 @@ export function SlingshotVolume({ onVolumeChange }: SlingshotVolumeProps) {
         ref={canvasRef}
         width={CANVAS_W}
         height={CANVAS_H}
-        className="w-full max-w-[600px] rounded-lg border border-border"
+        className="w-full max-w-[120px] rounded-lg border border-border"
         style={{ touchAction: "none" }}
         onMouseDown={handleDown}
         onMouseMove={handleMove}
