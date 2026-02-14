@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Chatbot } from "@/components/chatbot"
+import { SlingshotVolume } from "@/components/slingshot-volume"
 
 export default function Page() {
   const [number, setNumber] = useState(9173210000)
@@ -49,6 +50,11 @@ export default function Page() {
           Submit
         </button>
       </div>
+      <SlingshotVolume
+        onVolumeChange={(v) => {
+          if (audioRef.current) audioRef.current.volume = v
+        }}
+      />
     </main>
     <audio ref={audioRef} src="/audio/trap-queen.mp3" loop />
     <Chatbot />
