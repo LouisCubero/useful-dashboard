@@ -17,6 +17,7 @@ const KONAMI = [
 export function RedeemCode() {
   const [unlocked, setUnlocked] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [doomMode, setDoomMode] = useState(false)
   const [code, setCode] = useState("")
   const progressRef = useRef<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
@@ -40,6 +41,32 @@ export function RedeemCode() {
     return () => window.removeEventListener("keydown", handler)
   }, [unlocked])
 
+  if (doomMode) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90">
+        <div className="relative flex flex-col items-center gap-2">
+          <button
+            onClick={() => {
+              setDoomMode(false)
+              setCode("")
+            }}
+            className="absolute -top-8 right-0 text-xs font-bold text-red-500 hover:text-red-400"
+          >
+            ESC
+          </button>
+          <iframe
+            src="https://doom-captcha.vercel.app/"
+            className="h-[600px] w-[800px] rounded border-2 border-red-900"
+            allow="autoplay"
+          />
+          <p className="text-xs text-red-500">
+            {"DOOM mode activated. Good luck."}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="fixed top-4 left-4 z-50">
       {!unlocked ? (
@@ -61,7 +88,11 @@ export function RedeemCode() {
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              setSubmitted(true)
+              if (code.toLowerCase().trim() === "doom") {
+                setDoomMode(true)
+              } else {
+                setSubmitted(true)
+              }
             }}
             className="mt-1 flex gap-1"
           >
