@@ -4,6 +4,7 @@ import { useState } from "react"
 
 export default function Page() {
   const [number, setNumber] = useState(9173210000)
+  const [blurred, setBlurred] = useState(false)
 
   const formatPhone = (num: number) => {
     const s = String(num).padStart(10, "0")
@@ -11,7 +12,10 @@ export default function Page() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-4">
+    <main
+      className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background px-4 transition-all duration-500"
+      style={{ filter: blurred ? "blur(4px)" : "none" }}
+    >
       <h1 className="text-3xl font-bold text-foreground md:text-4xl">
         Please enter your phone number:
       </h1>
@@ -25,6 +29,12 @@ export default function Page() {
           aria-label="Increment phone number"
         >
           +
+        </button>
+        <button
+          onClick={() => setBlurred(true)}
+          className="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          Submit
         </button>
       </div>
     </main>
