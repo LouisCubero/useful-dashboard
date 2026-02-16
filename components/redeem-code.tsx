@@ -17,12 +17,12 @@ const KONAMI = [
 interface RedeemCodeProps {
   onFix?: () => void
   onWaifu?: () => void
+  onDoom?: () => void
 }
 
-export function RedeemCode({ onFix, onWaifu }: RedeemCodeProps) {
+export function RedeemCode({ onFix, onWaifu, onDoom }: RedeemCodeProps) {
   const [unlocked, setUnlocked] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [doomMode, setDoomMode] = useState(false)
   const [code, setCode] = useState("")
   const progressRef = useRef<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
@@ -45,33 +45,6 @@ export function RedeemCode({ onFix, onWaifu }: RedeemCodeProps) {
     window.addEventListener("keydown", handler)
     return () => window.removeEventListener("keydown", handler)
   }, [unlocked])
-
-  if (doomMode) {
-    return (
-      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90">
-        <div className="window w-[820px]">
-          <div className="title-bar">
-            <div className="title-bar-text">DOOM.exe</div>
-            <div className="title-bar-controls">
-              <button aria-label="Minimize" />
-              <button aria-label="Maximize" />
-              <button aria-label="Close" onClick={() => { setDoomMode(false); setCode("") }} />
-            </div>
-          </div>
-          <div className="window-body !m-0 !p-0">
-            <iframe
-              src="https://doom-captcha.vercel.app/"
-              className="h-[600px] w-full"
-              allow="autoplay"
-            />
-            <div className="status-bar">
-              <p className="status-bar-field">DOOM mode activated. Good luck.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="fixed top-4 left-4 z-50">
@@ -101,7 +74,8 @@ export function RedeemCode({ onFix, onWaifu }: RedeemCodeProps) {
                 e.preventDefault()
                 const val = code.toLowerCase().trim()
                 if (val === "doom") {
-                  setDoomMode(true)
+                  onDoom?.()
+                  setCode("")
                 } else if (val === "fix") {
                   onFix?.()
                   setCode("")

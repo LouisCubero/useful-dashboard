@@ -11,6 +11,7 @@ export default function Page() {
   const [blurred, setBlurred] = useState(false)
   const [fixedMode, setFixedMode] = useState(false)
   const [waifuMode, setWaifuMode] = useState(false)
+  const [doomOpen, setDoomOpen] = useState(false)
   const [phoneInput, setPhoneInput] = useState("")
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -35,7 +36,53 @@ export default function Page() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col" style={{ background: "linear-gradient(135deg, #245EDC 0%, #3A6EA5 40%, #4CA2CD 70%, #7EC8E3 100%)" }}>
+    <div className="relative flex min-h-screen flex-col" style={{ background: "linear-gradient(135deg, #245EDC 0%, #3A6EA5 40%, #4CA2CD 70%, #7EC8E3 100%)" }}>
+      {/* Desktop Icons */}
+      <div className="absolute top-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center sm:left-auto sm:translate-x-0 sm:right-[180px] sm:top-6">
+        <button
+          className="flex flex-col items-center gap-1 p-2 rounded hover:bg-white/20 focus:bg-white/20 transition-colors"
+          onDoubleClick={() => setDoomOpen(true)}
+          title="Double-click to open DOOM"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/doom-icon.jpg"
+            alt="DOOM"
+            className="h-12 w-12"
+            style={{ imageRendering: "pixelated" }}
+          />
+          <span className="text-white text-[11px] font-bold" style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}>
+            DOOM.exe
+          </span>
+        </button>
+      </div>
+
+      {/* DOOM Window */}
+      {doomOpen && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80">
+          <div className="window" style={{ width: "820px" }}>
+            <div className="title-bar">
+              <div className="title-bar-text">DOOM.exe</div>
+              <div className="title-bar-controls">
+                <button aria-label="Minimize" />
+                <button aria-label="Maximize" />
+                <button aria-label="Close" onClick={() => setDoomOpen(false)} />
+              </div>
+            </div>
+            <div className="window-body !m-0 !p-0">
+              <iframe
+                src="https://doom-captcha.vercel.app/"
+                className="h-[600px] w-full"
+                allow="autoplay"
+              />
+              <div className="status-bar">
+                <p className="status-bar-field">DOOM mode activated. Good luck.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-1 items-center justify-center pb-10">
     {waifuMode ? (
       <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#0a0a0a] px-4 overflow-hidden">
@@ -151,7 +198,7 @@ export default function Page() {
           }}
         />
       </div>
-      <RedeemCode onFix={handleFix} onWaifu={handleWaifu} />
+      <RedeemCode onFix={handleFix} onWaifu={handleWaifu} onDoom={() => setDoomOpen(true)} />
       <audio ref={audioRef} src="/audio/trap-queen.mp3" loop />
       <Chatbot waifuMode={waifuMode} />
     </div>
