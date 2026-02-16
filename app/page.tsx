@@ -37,10 +37,10 @@ export default function Page() {
 
   return (
     <div className="relative flex min-h-screen flex-col" style={{ background: "linear-gradient(135deg, #245EDC 0%, #3A6EA5 40%, #4CA2CD 70%, #7EC8E3 100%)" }}>
-      {/* Desktop Icons */}
-      <div className="absolute top-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center sm:left-auto sm:translate-x-0 sm:right-[180px] sm:top-6">
+      {/* Desktop Icons - vertical column, top-left, below redeem code window */}
+      <div className="absolute top-[140px] left-4 z-10 flex flex-col gap-1">
         <button
-          className="flex flex-col items-center gap-1 p-2 rounded hover:bg-white/20 focus:bg-white/20 transition-colors"
+          className="flex w-[70px] flex-col items-center gap-0.5 rounded p-1.5 transition-colors hover:bg-white/20 focus:bg-[#316ac5]/60 focus:outline-none"
           onDoubleClick={() => setDoomOpen(true)}
           title="Double-click to open DOOM"
         >
@@ -48,13 +48,14 @@ export default function Page() {
           <img
             src="/images/doom-icon.jpg"
             alt="DOOM"
-            className="h-12 w-12"
+            className="h-10 w-10"
             style={{ imageRendering: "pixelated" }}
           />
-          <span className="text-white text-[11px] font-bold" style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}>
+          <span className="text-center text-[11px] leading-tight text-white" style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.9)" }}>
             DOOM.exe
           </span>
         </button>
+        {/* Future icons go here - just add another <button> block */}
       </div>
 
       {/* DOOM Window */}
@@ -103,7 +104,7 @@ export default function Page() {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⢸⢀⣠⠤⠒⠋⠉⢿⡟⢷⣤⣸⡇⠀⠈⠻⣦⡀⠀⠀⠀⠀⠀⢀⡴⠋⡸⠀⠀⠀⡀⠀⠀⠀⣠⠏⠀⠈⣤⡀⠀⢸⡳⣭⢻⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⢀⣀⡠⠤⠒⠋⠉⠀⠀⠀⠀⠀⠈⠻⣦⡀⢹⡟⠷⢶⣤⣍⣻⣦⡀⣀⠴⠚⠁⠀⡴⠁⢀⣠⠞⡗⢀⣠⠞⠁⠀⠀⠀⢸⡷⡄⢸⡳⣭⢻⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠺⢳⣟⣋⣉⠉⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣝⠿⣾⣿⠀⣀⣠⠭⠿⠛⠉⠁⠀⠀⡴⠮⣶⠚⠉⠀⣀⡗⠋⢸⠀⠀⠀⠀⠀⠘⣷⡛⣯⢳⣭⢻⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣽⡯⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡤⠬⠟⠿⣏⡉⠁⠀⠀⠀⠀⠀⠀⠀⡤⠖⠋⢁⡤⢒⣩⡀⠀⠀⢸⠀⠀⠀⠀⠀⠀⣷⡹⣎⠷⣎⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣽⡯⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡤⠬⠟⠿⣏⡉⠁⠀⠀⠀⠀⠀⠀⠀⡤⠖⠋⢁⡤⢒⣩⡀⠀⠀⢸⠀⠀⠀⠀⠀⠀⣷⡹⣎⠷⣎⢿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀���⠀⠀
 ⠀⠀⠀⠀⠀⠀⠐⠶⣻⣛⣉⣁⣀⣀⣤⣠⣤⣤⡴⣶⠒⣺⡿⠛⢛⣿⢿⣶⣤⡈⠓⠂⠀⠀⠀⠀⠀⠀⠀⠀⠖⢉⣵⣾⣿⡿⣍⠙⠻⢧⣸⠀⠀⠀⠀⠀⠀⣿⡱⢯⡝⣮⣿⠅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⠧⠿⠦⠷⠽⠮⣿⠉⠀⢰⣟⡮⣟⣼⡻⡌⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⣾⡽⡿⠽⣽⣃⠀⠀⢹⠀⠀⠀⠀⠀⠀⣿⡹⢮⡝⡶⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣆⠀⣧⡀⠀⠀⠸⡄⠀⢸⠚⢛⠀⢘⠛⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⡉⠉⠆⠠⠋⠹⠀⠀⡾⠀⠀⠀⠀⠀⠀⣷⢏⡷⣹⢳⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
