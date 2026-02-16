@@ -16,11 +16,10 @@ const KONAMI = [
 
 interface RedeemCodeProps {
   onFix?: () => void
-  onWaifu?: () => void
   onDoom?: () => void
 }
 
-export function RedeemCode({ onFix, onWaifu, onDoom }: RedeemCodeProps) {
+export function RedeemCode({ onFix, onDoom }: RedeemCodeProps) {
   const [unlocked, setUnlocked] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [code, setCode] = useState("")
@@ -78,9 +77,6 @@ export function RedeemCode({ onFix, onWaifu, onDoom }: RedeemCodeProps) {
                   setCode("")
                 } else if (val === "fix") {
                   onFix?.()
-                  setCode("")
-                } else if (val === "waifu") {
-                  onWaifu?.()
                   setCode("")
                 } else {
                   setSubmitted(true)
