@@ -19,6 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/xp.css@0.2.6/dist/XP.css"
+        />
+      </head>
       <body className="font-sans antialiased">{children}</body>
     </html>
   )
