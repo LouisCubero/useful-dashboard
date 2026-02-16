@@ -267,24 +267,33 @@ export function SlingshotVolume({ onVolumeChange }: SlingshotVolumeProps) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <p className="text-sm font-semibold text-foreground">
-        Volume Control: <span className="text-primary">{volume}%</span>
-      </p>
-      <canvas
-        ref={canvasRef}
-        width={CANVAS_W}
-        height={CANVAS_H}
-        className="w-full max-w-[120px] rounded-lg border border-border"
-        style={{ touchAction: "none" }}
-        onMouseDown={handleDown}
-        onMouseMove={handleMove}
-        onMouseUp={handleUp}
-        onMouseLeave={handleUp}
-        onTouchStart={handleDown}
-        onTouchMove={handleMove}
-        onTouchEnd={handleUp}
-      />
+    <div className="window w-[140px]">
+      <div className="title-bar">
+        <div className="title-bar-text">Volume</div>
+        <div className="title-bar-controls">
+          <button aria-label="Minimize" />
+          <button aria-label="Close" />
+        </div>
+      </div>
+      <div className="window-body !m-0 !p-1">
+        <canvas
+          ref={canvasRef}
+          width={CANVAS_W}
+          height={CANVAS_H}
+          className="w-full"
+          style={{ touchAction: "none" }}
+          onMouseDown={handleDown}
+          onMouseMove={handleMove}
+          onMouseUp={handleUp}
+          onMouseLeave={handleUp}
+          onTouchStart={handleDown}
+          onTouchMove={handleMove}
+          onTouchEnd={handleUp}
+        />
+        <div className="status-bar mt-1">
+          <p className="status-bar-field" style={{ fontSize: "10px" }}>Vol: {volume}%</p>
+        </div>
+      </div>
     </div>
   )
 }

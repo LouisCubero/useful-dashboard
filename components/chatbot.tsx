@@ -150,70 +150,66 @@ export function Chatbot({ waifuMode = false }: { waifuMode?: boolean }) {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-[36px] right-2 z-50 flex flex-col items-end gap-2">
       {open && (
-        <div className="flex h-[400px] w-[320px] flex-col overflow-hidden rounded-xl border border-border bg-background shadow-lg">
-          <div className={`flex items-center justify-between px-4 py-3 ${waifuMode ? "bg-[#ff79c6]" : "bg-primary"}`}>
-            <span className={`text-sm font-semibold ${waifuMode ? "text-white" : "text-primary-foreground"}`}>
-              {waifuMode ? "Monika" : "Support Chat"}
-            </span>
-            <button
-              onClick={() => setOpen(false)}
-              className="text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-              aria-label="Close chat"
-            >
-              <X className="h-4 w-4" />
-            </button>
+        <div className="window w-[320px]">
+          <div className="title-bar">
+            <div className="title-bar-text">
+              {waifuMode ? "Monika.exe" : "Support Chat"}
+            </div>
+            <div className="title-bar-controls">
+              <button aria-label="Minimize" />
+              <button aria-label="Maximize" />
+              <button aria-label="Close" onClick={() => setOpen(false)} />
+            </div>
           </div>
-
-          <div
-            ref={scrollRef}
-            className="flex flex-1 flex-col gap-2 overflow-y-auto p-3"
-          >
-            {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${
-                  msg.role === "bot"
-                    ? "self-start bg-muted text-muted-foreground"
-                    : "self-end bg-primary text-primary-foreground"
-                }`}
-              >
-                {msg.text}
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2 border-t border-border p-3">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Type a message..."
-              className="flex-1 rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
-            />
-            <button
-              onClick={handleSend}
-              className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground transition-colors hover:bg-primary/90"
-              aria-label="Send message"
+          <div className="window-body !m-0 !p-0">
+            <div
+              ref={scrollRef}
+              className="flex h-[280px] flex-col gap-1 overflow-y-auto p-2"
+              style={{ background: "#fff" }}
             >
-              <Send className="h-4 w-4" />
-            </button>
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`max-w-[85%] px-2 py-1 text-xs ${
+                    msg.role === "bot"
+                      ? "self-start"
+                      : "self-end font-bold"
+                  }`}
+                  style={{
+                    background: msg.role === "bot" ? "#ece9d8" : "#316ac5",
+                    color: msg.role === "bot" ? "#000" : "#fff",
+                  }}
+                >
+                  {msg.role === "bot" && <strong>{waifuMode ? "Monika: " : "Agent: "}</strong>}
+                  {msg.text}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-1 p-2" style={{ borderTop: "1px solid #919b9c" }}>
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                placeholder="Type a message..."
+                className="flex-1 px-1 py-0.5 text-xs"
+              />
+              <button onClick={handleSend} style={{ fontSize: "11px" }}>
+                Send
+              </button>
+            </div>
           </div>
         </div>
       )}
 
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
-        aria-label="Open support chat"
+        style={{ fontSize: "11px" }}
       >
-        {open ? (
-          <X className="h-6 w-6" />
-        ) : (
-          <MessageCircle className="h-6 w-6" />
-        )}
+        {open ? "Close Chat" : "Support Chat"}
       </button>
     </div>
   )

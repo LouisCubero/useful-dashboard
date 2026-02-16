@@ -1,9 +1,12 @@
+@import "xp.css/dist/XP.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  image-rendering: pixelated;
 }
 
 @layer utilities {

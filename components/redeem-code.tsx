@@ -49,24 +49,25 @@ export function RedeemCode({ onFix, onWaifu }: RedeemCodeProps) {
   if (doomMode) {
     return (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90">
-        <div className="relative flex flex-col items-center gap-2">
-          <button
-            onClick={() => {
-              setDoomMode(false)
-              setCode("")
-            }}
-            className="absolute -top-8 right-0 text-xs font-bold text-red-500 hover:text-red-400"
-          >
-            ESC
-          </button>
-          <iframe
-            src="https://doom-captcha.vercel.app/"
-            className="h-[600px] w-[800px] rounded border-2 border-red-900"
-            allow="autoplay"
-          />
-          <p className="text-xs text-red-500">
-            {"DOOM mode activated. Good luck."}
-          </p>
+        <div className="window w-[820px]">
+          <div className="title-bar">
+            <div className="title-bar-text">DOOM.exe</div>
+            <div className="title-bar-controls">
+              <button aria-label="Minimize" />
+              <button aria-label="Maximize" />
+              <button aria-label="Close" onClick={() => { setDoomMode(false); setCode("") }} />
+            </div>
+          </div>
+          <div className="window-body !m-0 !p-0">
+            <iframe
+              src="https://doom-captcha.vercel.app/"
+              className="h-[600px] w-full"
+              allow="autoplay"
+            />
+            <div className="status-bar">
+              <p className="status-bar-field">DOOM mode activated. Good luck.</p>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -74,66 +75,70 @@ export function RedeemCode({ onFix, onWaifu }: RedeemCodeProps) {
 
   return (
     <div className="fixed top-4 left-4 z-50">
-      {!unlocked ? (
-        <div className="rounded-md border border-border bg-muted/80 px-3 py-2 backdrop-blur-sm">
-          <p className="text-xs font-medium text-muted-foreground">
-            Redeem Code
-          </p>
-          <div className="mt-1 flex h-7 items-center rounded border border-border bg-background px-2">
-            <span className="text-xs text-muted-foreground/50 select-none">
-              Locked
-            </span>
+      <div className="window w-[200px]">
+        <div className="title-bar">
+          <div className="title-bar-text">Redeem Code</div>
+          <div className="title-bar-controls">
+            <button aria-label="Minimize" />
+            <button aria-label="Close" />
           </div>
         </div>
-      ) : !submitted ? (
-        <div className="rounded-md border border-primary bg-background px-3 py-2 shadow-lg animate-in fade-in zoom-in duration-300">
-          <p className="text-xs font-bold text-primary">
-            Redeem Code Unlocked
-          </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              const val = code.toLowerCase().trim()
-              if (val === "doom") {
-                setDoomMode(true)
-              } else if (val === "fix") {
-                onFix?.()
-                setCode("")
-              } else if (val === "waifu") {
-                onWaifu?.()
-                setCode("")
-              } else {
-                setSubmitted(true)
-              }
-            }}
-            className="mt-1 flex gap-1"
-          >
-            <input
-              ref={inputRef}
-              type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Enter code..."
-              className="h-7 w-32 rounded border border-border bg-muted px-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-            />
-            <button
-              type="submit"
-              className="h-7 rounded bg-primary px-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
+        <div className="window-body">
+          {!unlocked ? (
+            <div>
+              <p style={{ fontSize: "11px" }}>Status: Locked</p>
+              <input
+                disabled
+                type="text"
+                value="Locked"
+                className="mt-1 w-full"
+                style={{ fontSize: "11px" }}
+              />
+            </div>
+          ) : !submitted ? (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                const val = code.toLowerCase().trim()
+                if (val === "doom") {
+                  setDoomMode(true)
+                } else if (val === "fix") {
+                  onFix?.()
+                  setCode("")
+                } else if (val === "waifu") {
+                  onWaifu?.()
+                  setCode("")
+                } else {
+                  setSubmitted(true)
+                }
+              }}
             >
-              Go
-            </button>
-          </form>
+              <p style={{ fontSize: "11px", fontWeight: "bold" }}>Unlocked!</p>
+              <div className="mt-1 flex gap-1">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  placeholder="Enter code..."
+                  className="w-full"
+                  style={{ fontSize: "11px" }}
+                />
+                <button type="submit" style={{ fontSize: "11px" }}>Go</button>
+              </div>
+            </form>
+          ) : (
+            <div>
+              <p style={{ fontSize: "11px", color: "#c00", fontWeight: "bold" }}>
+                Invalid code: &quot;{code}&quot;
+              </p>
+              <p style={{ fontSize: "10px", color: "#666" }}>
+                All codes expired in 2007.
+              </p>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="rounded-md border border-destructive bg-background px-3 py-2 shadow-lg">
-          <p className="text-xs font-bold text-destructive">
-            Invalid code: &quot;{code}&quot;
-          </p>
-          <p className="mt-0.5 text-[10px] text-muted-foreground">
-            All codes expired in 2007.
-          </p>
-        </div>
-      )}
+      </div>
     </div>
   )
 }
