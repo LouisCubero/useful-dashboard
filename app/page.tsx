@@ -136,7 +136,7 @@ export default function Page() {
           <span style={{ fontStyle: "italic", fontWeight: 900 }}>Start</span>
         </button>
         <div className="flex h-full items-center gap-2 border-l border-l-[#0D2F76] px-2 text-white" style={{ background: "linear-gradient(180deg, #1290E9 0%, #1963CA 50%, #1963CA 100%)", fontSize: "11px" }}>
-          <span>{clock}</span>
+          <span suppressHydrationWarning>{clock}</span>
         </div>
       </div>
 
