@@ -28,6 +28,15 @@ export default function Page() {
     setPhoneInput("")
   }
 
+  const handleChef = () => {
+    if (audioRef.current) {
+      audioRef.current.src = "/audio/yes-chef.mp3"
+      audioRef.current.currentTime = 0
+      audioRef.current.play()
+      musicStartedRef.current = true
+    }
+  }
+
   return (
     <div className="relative flex min-h-screen flex-col" style={{ background: "linear-gradient(135deg, #245EDC 0%, #3A6EA5 40%, #4CA2CD 70%, #7EC8E3 100%)" }}>
       {/* Desktop Icons - vertical column, top-left, below redeem code window */}
@@ -136,7 +145,7 @@ export default function Page() {
           }}
         />
       </div>
-      <RedeemCode onFix={handleFix} onDoom={() => setDoomOpen(true)} />
+      <RedeemCode onFix={handleFix} onDoom={() => setDoomOpen(true)} onChef={handleChef} />
       <audio ref={audioRef} src="/audio/trap-queen.mp3" loop />
       <Chatbot />
     </div>

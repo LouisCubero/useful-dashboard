@@ -17,9 +17,10 @@ const KONAMI = [
 interface RedeemCodeProps {
   onFix?: () => void
   onDoom?: () => void
+  onChef?: () => void
 }
 
-export function RedeemCode({ onFix, onDoom }: RedeemCodeProps) {
+export function RedeemCode({ onFix, onDoom, onChef }: RedeemCodeProps) {
   const [unlocked, setUnlocked] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [code, setCode] = useState("")
@@ -77,6 +78,9 @@ export function RedeemCode({ onFix, onDoom }: RedeemCodeProps) {
                   setCode("")
                 } else if (val === "fix") {
                   onFix?.()
+                  setCode("")
+                } else if (val === "chef") {
+                  onChef?.()
                   setCode("")
                 } else {
                   setSubmitted(true)
