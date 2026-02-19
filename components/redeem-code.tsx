@@ -85,6 +85,21 @@ export function RedeemCode({ onFix, onDoom, onChef }: RedeemCodeProps) {
                 } else if (val === "luma") {
                   window.open("https://lu.ma", "_blank")
                   setCode("")
+                } else if (val === "handshake") {
+                  window.open("https://app.joinhandshake.com/explore", "_blank")
+                  setCode("")
+                } else if (val === "linkedin") {
+                  window.open("https://www.linkedin.com/feed/", "_blank")
+                  setCode("")
+                } else if (val === "figma") {
+                  window.open("https://www.figma.com", "_blank")
+                  setCode("")
+                } else if (val === "vansh") {
+                  window.open("https://vansh.nyc/intern", "_blank")
+                  setCode("")
+                } else if (val === "gmail") {
+                  window.open("https://mail.google.com/mail/u/0/#inbox", "_blank")
+                  setCode("")
                 } else {
                   setSubmitted(true)
                 }
