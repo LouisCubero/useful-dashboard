@@ -82,6 +82,9 @@ export function RedeemCode({ onFix, onDoom, onChef }: RedeemCodeProps) {
                 } else if (val === "chef") {
                   onChef?.()
                   setCode("")
+                } else if (val === "luma") {
+                  window.open("https://lu.ma", "_blank")
+                  setCode("")
                 } else {
                   setSubmitted(true)
                 }
