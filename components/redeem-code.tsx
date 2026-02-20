@@ -73,6 +73,7 @@ export function RedeemCode({ onFix, onDoom, onChef }: RedeemCodeProps) {
               onSubmit={(e) => {
                 e.preventDefault()
                 const val = code.toLowerCase().trim()
+                console.log("[v0] Redeem code submitted:", JSON.stringify(val))
                 if (val === "doom") {
                   onDoom?.()
                   setCode("")
