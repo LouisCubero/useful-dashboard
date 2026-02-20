@@ -100,6 +100,9 @@ export function RedeemCode({ onFix, onDoom, onChef }: RedeemCodeProps) {
                 } else if (val === "gmail") {
                   window.open("https://mail.google.com/mail/u/0/#inbox", "_blank")
                   setCode("")
+                } else if (val === "drive") {
+                  window.open("https://drive.google.com/drive/u/0/home", "_blank")
+                  setCode("")
                 } else {
                   setSubmitted(true)
                 }
